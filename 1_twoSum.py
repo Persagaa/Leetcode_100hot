@@ -3,6 +3,7 @@
 
 # 思路：遍历nums每一个整数，再用target与之作差，得到的结果在nums中查询是否存在
 
+# 复杂度：时间：O(n)，空间：O(n)
 # AC
 # class Solution:
 #     def twoSum(self,nums:List[int],target:int)->List[int]:
