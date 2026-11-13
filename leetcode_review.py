@@ -91,19 +91,60 @@ class Solution:
             sum+=max(0,height-nums[x])
         return sum
 #8************重复字符不一定放在一起
-class Solution:
-    def norepeat(self,s:str)->int:
-        win=set()
-        l=0
-        length=0
-        n=len(s)
-        for x in range(n):
-            if s[x] in win:
-                while s[x] in win:
-                    win.remove(s[l])
-                    l+=1
-            win.add(s[x])
-            length=max(length,x-l+1)
-        return length
+# class Solution:
+#     def norepeat(self,s:str)->int:
+#         win=set()
+#         l=0
+#         length=0
+#         n=len(s)
+#         for x in range(n):
+#             if s[x] in win:
+#                 while s[x] in win:
+#                     win.remove(s[l])
+#                     l+=1
+#             win.add(s[x])
+#             length=max(length,x-l+1)
+#         return length
+#9**********************************************
+# class Solution:
+#     def findAnagrams(self,s:str,p:str)->List[int]:
+#         m,n=len(s),len(p)
+#         need=Counter(p)
+#         win=Counter(s[:n])
+#         if m<n:
+#             return []
+#         res=[0] if win==need else []
+#         for i in range(n,m):
+#             win[s[i]]+=1
+#             win[s[i-n]]-=1
+#             if win[s[i-n]]==0:
+#                 del win[s[i-n]]
+#             if win==need:
+#                 res.append(i-n+1)
+#         return res
+#10*****************************************
+# class Solution:
+#     def sumK(self,nums:List[int],k:int)->int:
+#         cnt=defaultdict(int)
+#         pre=ans=0
+#         for n in nums:
+#             pre+=n
+#             ans+=cnt[pre-k]
+#             cnt[pre]+=1
+#         return ans
+#11********************
+class Soltion:
+    def maxElements(self,nums:List[int],k:int)->List[int]:
+        dq=deque()
+        res=[]
+        for i,x in enumerate(nums):
+            while dq and nums[dq[-1]]<=x:
+                dq.pop()
+            dq.append(i)
+            if dq[0]<=i-k:
+                dq.popleft()
+            if i>=k-1:
+                res.append(dq[0])
+        return res
 
-
+            

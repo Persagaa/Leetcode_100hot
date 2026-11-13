@@ -13,20 +13,26 @@ class Solution:
 
 # ACM
 from typing import List
-from collections import defaultdict
 import sys
-
 class Solution:
-    def groupAnagrams(self,str:List[str])->List[List[str]]:
-            group=defaultdict(list)
-            for s in str:
-                key=tuple(sorted(s))
-                group[key].append(s)
-            return list(group.values())
+    def rotate(self,nums:List[int],k:int)->List[int]:
+        n=len(nums)
+        k%=n
+        def rev(l:int,r:int):
+            while l<r:
+                nums[l],nums[r]=nums[r],nums[l]
+                l+=1
+                r-=1
+        rev(0,n-1)
+        rev(0,k-1)
+        rev(k,n-1)
+        return nums
 
 if __name__=="__main__":
-     line=sys.stdin.readline().strip()
-     inner=line.strip("[]")
-     strs=[x.strip().strip('"').strip("'")
-           for x in inner.split(",") if x.strip()]
-     print(Solution().groupAnagrams(str))
+    line=sys.stdin.readline().strip()
+    inner=line.split(',')
+    nums=[int(x) for x in inner]
+    k=sys.stdin.readline().strip()
+    k=int(k)
+    print(Solution().rotate(nums,k))
+
